@@ -7,14 +7,19 @@ var mainMusic = document.getElementById("main_music"),
         goMusic = document.getElementById("gameOver"),
         start = document.getElementById("start"),
         loading = document.getElementById("loading"),
-        files = new Array(mainMusic, foodMusic, goMusic), counter = 0;
-console.log(files);
+        files = new Array(mainMusic, foodMusic, goMusic), counter = 0,
+        //Initializing Canvas
+        canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d"),
+        //Full width and height
+        w = window.innerWidth, h = window.innerHeight;
+canvas.height = h;
+canvas.width = w;
 for (var i = 0; i < files.length; i++) {
     var file = files[i];
     file.addEventListener("loadeddata", function () {
         counter++;
         var percent = Math.floor((counter / files.length) * 100);
-        loading.innerHTML = "Loading" + percent + "%";
+        loading.innerHTML = "Loading " + percent + "%";
         if (percent == 100)
             showButton();
     });
@@ -23,12 +28,6 @@ function showButton() {
     start.style.top = "30%";
     loading.style.top = "100%";
 }
-//Initializing Canvas
-var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d"),
-//Full width and height
-        w = window.innerWidth, h = window.innerHeight;
-canvas.height = h;
-canvas.width = w;
 var reset, scoreText, menu, reMenu, score = 0,
         init = function () {
             mainMusic.play();
@@ -55,6 +54,10 @@ var reset, scoreText, menu, reMenu, score = 0,
                     Food = function () {
                         this.x = Math.round(Math.random() * (w - size) / size);
                         this.y = Math.round(Math.random() * (h - size) / size);
+                        this.draw = function () {
+                            ctx.fillStyle = "white";
+                            ctx.fillRect(this.x * size, this.y * size, size, size);
+                        };
                     }, f = new Food(),
                     initSnake = function () {
                         var length = 10;
@@ -93,7 +96,7 @@ var reset, scoreText, menu, reMenu, score = 0,
                                 }, 30);
                             if (key)
                                 e.preventDefault();
-                        }
+                        };
                         //Directions
                         if (dir == "right")
                             head_x++;
@@ -110,7 +113,7 @@ var reset, scoreText, menu, reMenu, score = 0,
                         if (head_x >= w / size || head_x <= -1 || head_y >= h / size || head_y <= -1) {
                             if (over == 0) {
                                 hitType = "wall";
-                                gameOver();
+                                gameover();
                             }
                             over++;
                         }
@@ -129,7 +132,7 @@ var reset, scoreText, menu, reMenu, score = 0,
                             if (speed <= 45)
                                 speed++;
                             clearInterval(game_loop);
-                            game_loop = setInterval(draw, 1000 / spped);
+                            game_loop = setInterval(draw, 1000 / speed);
                         } else {
                             //check collision between snake parts 
                             for (var j = 1; j < snake.length; j++) {
@@ -137,7 +140,7 @@ var reset, scoreText, menu, reMenu, score = 0,
                                 if (head_x == s.x && head_y == s.y) {
                                     if (over == 0) {
                                         hitType = "self";
-                                        gameorver();
+                                        gameover();
                                     }
                                     over++;
                                 }
@@ -167,7 +170,7 @@ var reset, scoreText, menu, reMenu, score = 0,
                         mainMusic.play();
                         return;
                     },
-                    gameouver = function () {
+                    gameover = function () {
                         clearInterval(game_loop);
                         mainMusic.pause();
                         goMusic.play();
