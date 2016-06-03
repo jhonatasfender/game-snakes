@@ -30,7 +30,28 @@ var reset,scoreText,menu,reMenu,score=0;
 function init(){
 	mainMusic.play();
 	menu.style.zIndex="-1";
-	var snake,size=10,speed=25,dir,game_loop,over=0,hitType;
-
+	var snake,size=10,speed=25,dir,game_loop,over=0,hitType,
+	//Custom funny gameover messages
+	msgsSelf=[
+		"There is plenty of food. Don't eat yourself!",
+		"Is your body tastier than the food?",
+		"AArrgghhh!! I bit myself!!",
+		"Do you have Autophagia?"
+	],
+	msgsWall = [
+		"You broke your head!",
+		"The wall is stronger than it seems!",
+		"there is no way to escape the game...",
+		"LOOOK MA! NO HEAD...!!",
+		"Can't see the wall? huh?"
+	];
+	function paintCanvas(){
+		ctx.fillStyle="black";
+		ctx.fillRect(0,0,w,h);
+	}
+	var Food = function (){
+		this.x = Math.round(Math.random() * (w-size)/size);
+		this.y = Math.round(Math.random()*);
+	}
 }
 
