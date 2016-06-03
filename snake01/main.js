@@ -19,7 +19,7 @@ for(var i=0;i<files.length;i++){
 }
 function showButton(){
 	start.style.top="30%";
-	loadingl.style.top="100%";
+	loading.style.top="100%";
 }
 //Initializing Canvas
 var canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),
@@ -44,15 +44,30 @@ function init(){
 		"there is no way to escape the game...",
 		"LOOOK MA! NO HEAD...!!",
 		"Can't see the wall? huh?"
-	];
-	function paintCanvas(){
+	],
+	paintCanvas=function(){
 		ctx.fillStyle="black";
 		ctx.fillRect(0,0,w,h);
-	}
-	var Food = function (){
+	},
+	 Food = function (){
 		this.x = Math.round(Math.random() * (w-size)/size);
-		this.y = Math.round(Math.random()*);
-	}
+		this.y = Math.round(Math.random() * (h-size)/size);
+	},f=new Food(),
+	initSnake = function(){
+		var length = 10;
+		snake = [];
+		for(var i=loength-1;i>=0;i--)
+			snake.push({x:i,y:0});
+	},
+	paintSnake=function(){
+		for(var i=0;i<snake.length;i++){
+			var s=snake[i];
+			ctx.fillStyle="white";
+			ctx.fillRect(s.x*size,s.y*size,size,size);
+		}
+	},
+	updateSnake=function(){
+		
+	},
 }
-
 
