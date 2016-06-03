@@ -26,8 +26,8 @@ var canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),
 //Full width and height
 w=window.innerWidth,h=window.innerHeight;
 canvas.height=h;canvas.width=w;
-var reset,scoreText,menu,reMenu,score=0;
-function init(){
+var reset,scoreText,menu,reMenu,score=0,
+init =function (){
 	mainMusic.play();
 	menu.style.zIndex="-1";
 	var snake,size=10,speed=25,dir,game_loop,over=0,hitType,
@@ -128,6 +128,45 @@ function init(){
 		paintSnake();
 		updateSnake();
 		// Draw food
-		
+		f.draw();
 	},
-}
+	reset=function(){
+		initSnake();
+		f=new Food();
+		reMenu.style.zIndex="-1";
+		dir="right";
+		over=0;
+		speed=30;
+		if(typeof game_loop!=undefined)clearInterval(game_loop);
+		game_loop=setInterval(draw,1000/speed);
+		score=0;
+		scoreText.innerHTML="Score: "+score;
+		mainMusic.currentTime=0;
+		mainMusic.play();
+		return;
+	},
+	gameouver=function(){
+		clearInterval(game_loop);
+		mainMusic.pause();
+		goMusic.play();
+		var tweet=document.getElementById("tweet"),
+		//get the gameover text
+		goText=document.getElementById("info2");
+		tweet.href='';
+		//show the messages
+		if(hitType=="wall")
+			goText.innerHTML=msgsWall[Math.floor(Math.random()*msgsWall.length)];
+		else			
+			goText.innerHTML=msgsSelf[Math.floor(Math.random()*msgsWall.length)];
+		reMenu.stylezIndex="1";		
+	};
+	reset();
+},
+//menus
+startMenu= function(){
+	menu=document.getElementById("menu");
+	reMenu=document.getElementById("reMenu");
+	scoreText=document.getElementById("score");
+	reMenu.style.zIndex="-1";
+};
+startMenu();
