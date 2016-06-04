@@ -8,6 +8,7 @@ var mainMusic = document.getElementById("main_music"),
         start = document.getElementById("start"),
         loading = document.getElementById("loading"),
         files = new Array(mainMusic, foodMusic, goMusic), counter = 0;
+console.log(files);
 for (var i = 0; i < files.length; i++) {
     var file = files[i];
     file.addEventListener("loadeddata", function () {
