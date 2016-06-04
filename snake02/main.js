@@ -4,5 +4,10 @@
  * https://github.com/betamos/Snake-JS
  * 
  */
-
-
+function SnakeJS(parentElement,config){
+	var utilities=new Utilities(),
+	defaultConfig={
+		autoInit:true,//Game inits automagically
+		gridWidth:30,
+	},
+}
