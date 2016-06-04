@@ -1,7 +1,8 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * I am starting up another project to web games, I am basing myself of this link
+ * 
+ * https://github.com/betamos/Snake-JS
+ * 
  */
 
 
